@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AFFET SIPAM 💖</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      overflow: hidden;
+      font-family: 'Arial', sans-serif;
+    }
+
+    button {
+      padding: 15px 35px;
+      font-size: 20px;
+      background: #ff4d6d;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      z-index: 2;
+      transition: transform 0.2s ease;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+    }
+
+    /* Kalpler animasyonu */
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      transform: rotate(45deg);
+      animation: floatUp 6s linear infinite;
+      opacity: 0.7;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) rotate(45deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-800px) rotate(45deg);
+        opacity: 0;
+      }
+    }
+
+    /* Video popup */
+    .video-popup {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.85);
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
+      flex-direction: column;
+      padding: 10px;
+    }
+
+    .video-popup video {
+      max-width: 90%;
+      max-height: 70%;
+      border-radius: 15px;
+      box-shadow: 0 0 25px #ff4d6d;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 20px; right: 20px;
+      font-size: 40px;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <button onclick="showVideo()">💖 BENİ AFFET(TIKLA!) 💖</button>
+
+  <!-- Kalpler -->
+  <div id="hearts"></div>
+
+  <!-- Video popup -->
+  <div class="video-popup" id="videoPopup">
+    <span class="close-btn" onclick="closeVideo()">&times;</span>
+    <video id="loveVideo" autoplay controls>
+      <source src="SIPAM BENİ AFFET....mp4" type="video/mp4">
+      Tarayıcınız bu videoyu desteklemiyor.
+    </video>
+  </div>
+
+  <script>
+    // Kalpler oluştur
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.style.left = Math.random() * window.innerWidth + "px";
+      heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 6000);
+    }
+    setInterval(createHeart, 400);
+
+    // Video açma
+    function showVideo() {
+      const popup = document.getElementById("videoPopup");
+      const video = document.getElementById("loveVideo");
+      popup.style.display = "flex";
+      video.currentTime = 0;
+      video.play();
+    }
+
+    // Video kapatma
+    function closeVideo() {
+      const popup = document.getElementById("videoPopup");
+      const video = document.getElementById("loveVideo");
+      video.pause();
+      popup.style.display = "none";
+    }
+  </script>
+
+</body>
+</html>
